@@ -31,7 +31,16 @@ class Card{
 
 //Trianna
 class Hand{
+    protected:
+        vector<Card*> cardVector;
+    
+    public:
+        Hand();
+        virtual ~Hand();
 
+        void add(Card* = cardPtr);
+        void clearHand();
+        int getTotal() const;
 }
 
 //Trianna
