@@ -8,7 +8,25 @@ using namespace std;
 
 //Trianna
 class Card{
+    private:
+        bool isFaceUp;
 
+    protected:
+        RANK rank;
+        SUIT suit;
+
+    public:
+        enum RANK{
+            Ace, Two, Three, Four, Five, Six, Seven,
+            Eight, Nine, Ten, Jack, Queen, King
+        };
+        enum SUIT{
+            Hearts, Spades, Diamonds, Clovers
+        };
+
+        Card(RANK rank = ACE, RANK suit = SPADES, bool isUp = true);
+        int getValue();
+        void flip();
 }
 
 //Trianna
