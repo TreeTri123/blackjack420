@@ -17,17 +17,17 @@ class Card{
 
     public:
         enum RANK{
-            Ace, Two, Three, Four, Five, Six, Seven,
-            Eight, Nine, Ten, Jack, Queen, King
+            ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+            EIGHT, NINE, TEN, JACK, QUEEN, KING
         };
         enum SUIT{
-            Hearts, Spades, Diamonds, Clovers
+            HEARTS, SPADES, DIAMONDS, CLOVERS
         };
 
         Card(RANK rank = ACE, RANK suit = SPADES, bool isUp = true);
         int getValue();
         void flip();
-}
+};
 
 //Trianna
 class Hand{
@@ -41,30 +41,38 @@ class Hand{
         void add(Card* = cardPtr);
         void clearHand();
         int getTotal() const;
-}
+};
 
 //Trianna
-class Deck{
+class Deck : public Hand {
+    public:
+        Deck();
+        virtual ~Deck();
 
-}
+        void populate();
+        void shuffle();
+        void deal(Hand& aHand);
+        void additionalCards(GenericPlayer& aGenericPlayer);
+
+};
 
 //Nakana
 class GenericPlayer{
 
-}
+};
 
 //Nakana
 class Player{
 
-}
+};
 
 //Nakana
 class House{
 
-}
+};
 
 //Trianna
 class Game{
 
-}
+};
 
