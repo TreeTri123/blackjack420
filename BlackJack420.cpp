@@ -6,4 +6,23 @@
 
 using namespace std;
 
-logic here
+Card::Card(RANK rank, RANK suit, bool isUp)
+    : rank(rank), suit(suit), isFaceUp(isUp){
+
+}
+
+int Card::getValue() const{
+    if (!isFaceUp){
+        return 0;
+    }
+
+    if (rank == KING || rank == QUEEN || rank == JACK){
+        return 10;
+    }
+
+    return rank;
+}
+
+void Card::flip(){
+    isFaceUp = !isFaceUp;
+}
