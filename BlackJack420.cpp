@@ -86,5 +86,5 @@ int Hand::getTotal() const{
         }
     }
 
-    return totall;
+    return total;
 }
