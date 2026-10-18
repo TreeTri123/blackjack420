@@ -8,13 +8,6 @@ using namespace std;
 
 //Trianna
 class Card{
-    private:
-        bool isFaceUp;
-
-    protected:
-        RANK rank;
-        SUIT suit;
-
     public:
         enum RANK{
             ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
@@ -27,13 +20,18 @@ class Card{
         Card(RANK rank = ACE, RANK suit = SPADES, bool isUp = true);
         int getValue();
         void flip();
+
+    protected:
+        RANK rank;
+        SUIT suit;
+
+    private:
+        bool isFaceUp;
+
 };
 
 //Trianna
 class Hand{
-    protected:
-        vector<Card*> cardVector;
-    
     public:
         Hand();
         virtual ~Hand();
@@ -41,6 +39,10 @@ class Hand{
         void add(Card* = cardPtr);
         void clearHand();
         int getTotal() const;
+
+    protected:
+        vector<Card*> cardVector;
+   
 };
 
 //Trianna
@@ -73,6 +75,15 @@ class House{
 
 //Trianna
 class Game{
+    public:
+        Game(const string& name);
+        ~Game();
+        void play();
+
+    private:
+        Deck deck;
+        House house;
+        Player player;
 
 };
 
