@@ -59,17 +59,41 @@ class Deck : public Hand {
 };
 
 //Nakana
-class GenericPlayer{
+class GenericPlayer : public Hand{
+    public:
+        GenericPlayer();
+        virtual ~GenericPlayer();
 
+        string getName() const;
+        void setName(const string& playerName);
+        bool isBusted();
+        bool bust() const;
+        virtual bool isHitting() const = 0;
+
+    private:
+        string name;
 };
 
 //Nakana
-class Player{
+class Player : public GenericPlayer{
+    public:
+        Player(const string& playerName = "");
+        virtual ~Player();
 
+        virtual bool isHitting() const;
+        bool win() const;
+        bool lose() const;
+        bool push() const;
 };
 
 //Nakana
-class House{
+class House : public GenericPlayer{
+    public:
+        House(const string& houseName = "Dealer");
+        virtual ~House();
+
+        virtual bool isHitting() const;
+        void flipFirstCard();
 
 };
 
