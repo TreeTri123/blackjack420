@@ -148,6 +148,7 @@ bool Player::isHitting() const {
         else if (input == 'n') {
             return false;
         }
+        //if user inputs letter other than y or n
         else {
             cout << "Not a valid answer" << endl;
         }
@@ -167,4 +168,36 @@ bool Player::lose() const {
 bool Player::push() const {
     cout << getName() << " has pushed" << endl;
     return true;
+}
+
+//House class functions
+
+//Constructor
+House::House(const string& houseName)
+    : GenericPlayer() {
+    setName(houseName);
+}
+
+//Destructor
+House::~House() {
+}
+
+bool House::isHitting() const {
+    //Hit if dealer's total is less than or equal to 16
+    if (getTotal() <= 16) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void House::flipFirstCard() {
+    //If cardVector is not empty, then flip first element
+    if (!cardVector.empty()) {
+        cardVector[0]->flip();
+    }
+    else {
+        cout << "There are no cards to flip" << endl;
+    }
 }
