@@ -169,9 +169,9 @@ void Deck::deal(Hand& aHand){
 }
 
 //Keep dealing while player is not busted and wants to hit
-void Deck::additionalCards(GenericPlayer& a GenericPlayer){
+void Deck::additionalCards(GenericPlayer& aGenericPlayer){
     while (!aGenericPlay.isBusted() && aGenericPlayer.isHitting()){
-        if (cardVector.emplty()){
+        if (cardVector.empty()){
             cout << "No cards remaining, unable to deal " << endl;
             break;
         }
@@ -279,7 +279,7 @@ Game::~Game(){
 //playing the game
 void Game::play(){
 
-    for (i = 0; i < 2; ++i){
+    for (int i = 0; i < 2; ++i){
         deck.deal(player);
         deck.deal(house);
     }
