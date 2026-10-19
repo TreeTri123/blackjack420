@@ -14,6 +14,7 @@ Card::Card(RANK rank, RANK suit, bool isUp)
 
 }
 
+//getting value of each card
 int Card::getValue() const{
     if (!isFaceUp){
         return 0;
@@ -26,6 +27,7 @@ int Card::getValue() const{
     return rank;
 }
 
+//flipping the card over
 void Card::flip(){
     isFaceUp = !isFaceUp;
 }
@@ -37,15 +39,17 @@ Hand::Hand(){
     cardVector.reserve(7);
 }
 
-//Destructor 
+//Destructor + deleting the remaining hand
 Hand::~Hand(){
     clearHand();
 }
 
+//adding cards to the deck
 void Hand::add (Card* cardPtr){
     cardVector.pushback(cardPtr);
 }
 
+//Clearing the hand
 void Hand::clearHand(){
     vector<Card*>::iterator iter;
 
@@ -57,6 +61,7 @@ void Hand::clearHand(){
     cardVector.clear();
 }
 
+//adding up the total to 21
 int Hand::getTotal() const{
     int total = 0;
     vector<Card*>::const_iterator iter;
@@ -121,6 +126,61 @@ bool GenericPlayer::isBusted() const {
 bool GenericPlayer::bust() const {
     cout << name << " has busted" << endl;
     return true;
+}
+
+// Deck class functions
+
+//reserve space and create the deck
+Deck::Deck(){
+    cardVector.reserve(52);
+    populate();
+}
+
+//Deleting remaining cards
+Deck::~Deck(){
+}
+
+//Create one card for each combo of suit and rank
+void Deck::populate(){
+    clearHand();
+
+    for (int s = Card::CLUBS; s <= Card:: SPADES; ++s){
+        for (int r = Card::ACE; r <= Card::KING; ++r){
+            add(new Card(<Card::RANK>(r),<Card::SUIT>(s)));
+        }
+    }
+}
+
+//Randomize the order of the cards
+void Deck::shuffle(){
+    random_shuffle(cardVector.begin(), cardVector.end());
+}
+
+//Transfer the last card from the deck to hand
+void Deck::deal(Hand& aHand){
+    if (!cardVector.empty()){
+        aHand.add(cardVector.back());
+        cardVector.pop_back();
+    } else {
+        cout << "You are out of cards and are unable to deal" << endl;
+    }
+}
+
+//Keep dealing while player is not busted and wants to hit
+void Deck::additionalCards(GenericPlayer& a GenericPlayer){
+    while (!aGenericPlay.isBusted() && aGenericPlayer.isHitting()){
+        if (cardVector.emplty()){
+            cout << "No cards remaining, unable to deal " << endl;
+            break;
+        }
+    }
+
+    deal(aGenericPlayer);
+    cout << aGenericPlayer << endl;
+
+    if (aGenericPlayer.isBusted()){
+        aGenericPlayer.bust();
+    }
 }
 
 //Player class functions
