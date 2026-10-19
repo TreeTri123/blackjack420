@@ -89,7 +89,7 @@ int Hand::getTotal() const{
     return total;
 }
 
-// GenericPlayer class functions
+//GenericPlayer class functions
 
 //Constructor
 GenericPlayer::GenericPlayer() 
@@ -120,5 +120,51 @@ bool GenericPlayer::isBusted() const {
 
 bool GenericPlayer::bust() const {
     cout << name << " has busted" << endl;
+    return true;
+}
+
+//Player class functions
+
+//Constructor
+Player::Player(const string& playerName)
+    : GenericPlayer() {
+    setName(playerName);
+}
+
+//Destructor
+Player::~Player() {
+}
+
+bool Player::isHitting() const {
+    char input;
+
+    while (true) {
+        cout << getName() << ", would you like to hit? y for Yes, n for No: ";
+        cin >> input;
+
+        if (input == 'y') {
+            return true;
+        }
+        else if (input == 'n') {
+            return false;
+        }
+        else {
+            cout << "Not a valid answer" << endl;
+        }
+    }
+}
+
+bool Player::win() const {
+    cout << getName() << " has won!" << endl;
+    return true;
+}
+
+bool Player::lose() const {
+    cout << getName() << " has lost!" << endl;
+    return true;
+}
+
+bool Player::push() const {
+    cout << getName() << " has pushed" << endl;
     return true;
 }
