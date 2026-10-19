@@ -1,5 +1,7 @@
 #include <iostream>
-#include <BlackJack420.h>
+#include "BlackJack420.h"
+#include <algorithm>
+#include <vector>
 #include <array>
 #include <random>
 #include <string>
@@ -9,7 +11,7 @@ using namespace std;
 //Card class functions
 
 //Constructor
-Card::Card(RANK rank, RANK suit, bool isUp)
+Card::Card(RANK rank, SUIT suit, bool isUp)
     : rank(rank), suit(suit), isFaceUp(isUp){
 
 }
@@ -45,8 +47,8 @@ Hand::~Hand(){
 }
 
 //adding cards to the deck
-void Hand::add (Card* cardPtr){
-    cardVector.pushback(cardPtr);
+void Hand::add(Card* cardPtr){
+    cardVector.push_back(cardPtr);
 }
 
 //Clearing the hand
@@ -146,7 +148,7 @@ void Deck::populate(){
 
     for (int s = Card::CLUBS; s <= Card:: SPADES; ++s){
         for (int r = Card::ACE; r <= Card::KING; ++r){
-            add(new Card(<Card::RANK>(r),<Card::SUIT>(s)));
+            add(new Card(static_cast<Card::RANK>(r),static_cast<Card::SUIT>(s)));
         }
     }
 }
@@ -260,4 +262,63 @@ void House::flipFirstCard() {
     else {
         cout << "There are no cards to flip" << endl;
     }
+}
+
+//Game Class Functions
+
+//Set player name and prepare the deck
+Game::Game(const string& name){
+    player.setName(name);
+    deck.populate();
+    deck.shuffle();
+}
+
+Game::~Game(){
+}
+
+//playing the game
+void Game::play(){
+
+    for (i = 0; i < 2; ++i){
+        deck.deal(player);
+        deck.deal(house);
+    }
+
+    //hide house first card
+    house.flipFirstCard();
+
+    cout << "Player: " << player << endl;
+    cout << "House: " << house << endl;
+
+    //Take additional cards
+    deck.additionalCards(player);
+
+    //Reveal house first card
+    house.flipFirstCard();
+    cout << "House: " << house << endl;
+
+    //House take additional cards
+    deck.additionalCards(house);
+
+    if (house.isBusted()){
+        //a player who has not busted wins againsr a busted house
+        if (!player.isBusted()){
+            player.win();
+        }
+    } else {
+        //compare totals only if player has not busted
+        if (!player.isBusted()){
+            if (player.getTotal() > house.getTotal()){
+                player.win();
+            } else if (player.getTotal() < house.getTotal()){
+                player.lose();
+            } else {
+                player.push();
+            }
+        }
+    }
+
+    //remove and delete cards from both hands
+    player.clearHand();
+    house.clearHand();
 }
