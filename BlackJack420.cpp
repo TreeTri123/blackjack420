@@ -88,3 +88,37 @@ int Hand::getTotal() const{
 
     return total;
 }
+
+// GenericPlayer class functions
+
+//Constructor
+GenericPlayer::GenericPlayer() 
+    : name("") {
+
+}
+
+//Destructor
+GenericPlayer::~GenericPlayer() {
+}
+
+string GenericPlayer::getName() const {
+    return name;
+}
+
+void GenericPlayer::setName(const string& playerName) {
+    name = playerName;
+}
+
+bool GenericPlayer::isBusted() const {
+    if (getTotal() > 21) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool GenericPlayer::bust() const {
+    cout << name << " has busted" << endl;
+    return true;
+}
