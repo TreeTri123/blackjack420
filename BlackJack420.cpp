@@ -322,3 +322,50 @@ void Game::play(){
     player.clearHand();
     house.clearHand();
 }
+
+//Overloaded << operator for Card
+
+ostream& operator<<(ostream& out, const Card& card) {
+    const string RANKS[] = {
+        "", "A", "2", "3", "4", "5", "6", "7",
+        "8", "9", "10", "J", "Q", "K"
+    };
+
+    const string SUITS[] = {
+        "H", "S", "D", "C"
+    };
+
+    if (card.isFaceUp) {
+        out << RANKS[card.rank] << SUITS[card.suit];
+    }
+    else {
+        out << "XX";
+    }
+
+    return out;
+}
+
+//Overloaded << operator for GenericPlayer
+
+ostream& operator<<(ostream& out, const GenericPlayer& player) {
+    out << player.name << "\t";
+
+    if (!player.cardVector.empty()) {
+        vector<Card*>::const_iterator iter;
+
+        for (iter = player.cardVector.begin();
+            iter != player.cardVector.end();
+            iter++) {
+                out << *(*iter) << "\t";
+        }
+
+        if (player.getTotal() != 0) {
+            out << "(" << player.getTotal() << ")";
+        }
+    }
+    else {
+        out << "<empty>";
+    }
+
+    return out;
+}

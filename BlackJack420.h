@@ -24,6 +24,8 @@ class Card{
         int getValue() const;
         void flip();
 
+        friend ostream& operator<<(ostream& out, const Card& card);
+
     protected:
         RANK rank;
         SUIT suit;
@@ -71,9 +73,11 @@ class GenericPlayer : public Hand{
 
         string getName() const;
         void setName(const string& playerName);
-        bool isBusted();
+        bool isBusted() const;
         bool bust() const;
         virtual bool isHitting() const = 0;
+
+        friend ostream& operator<<(ostream& out, const GenericPlayer& player);
 
     private:
         string name;
@@ -115,5 +119,8 @@ class Game{
         Player player;
 
 };
+
+ostream& operator<<(ostream& out, const Card& card);
+ostream& operator<<(ostream& out, const GenericPlayer& player);
 
 #endif
