@@ -1,7 +1,7 @@
 #include <iostream>
 #include "BlackJack420.h"
 
-int main {
+int main() {
 
     cout << "Welcome to BlackJack!" << endl;
 
@@ -15,8 +15,7 @@ int main {
         Game game(name);
         game.play();
 
-        cout << "Would you like to play again to stay in the game?
-                y for Yes, n for No" << endl;
+        cout << "Would you like to play again to stay in the game? y for Yes, n for No" << endl;
         cin >> again;
     }
 

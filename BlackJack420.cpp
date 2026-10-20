@@ -146,7 +146,7 @@ Deck::~Deck(){
 void Deck::populate(){
     clearHand();
 
-    for (int s = Card::CLUBS; s <= Card:: SPADES; ++s){
+    for (int s = Card::HEARTS; s <= Card:: CLUBS; ++s){
         for (int r = Card::ACE; r <= Card::KING; ++r){
             add(new Card(static_cast<Card::RANK>(r),static_cast<Card::SUIT>(s)));
         }
@@ -170,15 +170,15 @@ void Deck::deal(Hand& aHand){
 
 //Keep dealing while player is not busted and wants to hit
 void Deck::additionalCards(GenericPlayer& aGenericPlayer){
-    while (!aGenericPlay.isBusted() && aGenericPlayer.isHitting()){
+    while (!aGenericPlayer.isBusted() && aGenericPlayer.isHitting()){
         if (cardVector.empty()){
             cout << "No cards remaining, unable to deal " << endl;
             break;
         }
-    }
 
-    deal(aGenericPlayer);
-    cout << aGenericPlayer << endl;
+        deal(aGenericPlayer);
+        cout << aGenericPlayer << endl;
+    }
 
     if (aGenericPlayer.isBusted()){
         aGenericPlayer.bust();

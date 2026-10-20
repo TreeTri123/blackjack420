@@ -1,8 +1,11 @@
+#ifndef BLACKJACK420_H
+#define BLACKJACK420_H
+
 #include <iostream>
-#include <BlackJack420.cpp>
 #include <array>
 #include <random>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -10,15 +13,15 @@ using namespace std;
 class Card{
     public:
         enum RANK{
-            ACE, 2, 3, 4, 5, 6, 7,
-            8, 9, 10, JACK, QUEEN, KING
+            ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+            EIGHT, NINE, TEN, JACK, QUEEN, KING
         };
         enum SUIT{
-            HEARTS, SPADES, DIAMONDS, CLOVERS
+            HEARTS, SPADES, DIAMONDS, CLUBS
         };
 
-        Card(RANK rank = ACE, RANK suit = SPADES, bool isUp = true);
-        int getValue();
+        Card(RANK rank = ACE, SUIT suit = SPADES, bool isUp = true);
+        int getValue() const;
         void flip();
 
     protected:
@@ -36,7 +39,7 @@ class Hand{
         Hand();
         virtual ~Hand();
 
-        void add(Card* = cardPtr);
+        void add(Card* cardPtr);
         void clearHand();
         int getTotal() const;
 
@@ -44,6 +47,8 @@ class Hand{
         vector<Card*> cardVector;
    
 };
+
+class GenericPlayer;
 
 //Trianna
 class Deck : public Hand {
@@ -111,3 +116,4 @@ class Game{
 
 };
 
+#endif
